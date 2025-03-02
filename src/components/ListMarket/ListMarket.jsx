@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react"
 
 import { MarketContext } from "../../context/MarketContext"
+import { Product } from "./Product/Product"
 
 export const ListMarket = () => {
 	const { listProduct, setTotalPrice, dateProduct, totalPrice, sectionStyle } = useContext(MarketContext)
@@ -48,11 +49,7 @@ export const ListMarket = () => {
 			<ul className="flex-col flex w-full p-2 bg-sky-950 m-2 rounded-xl">
 				{
 					filteredList.map((p, i) => (
-						<li key={p+i}>
-							<p>
-								<span className="text-yellow-500">{p.name} ({p.shop})</span>: {p.price}$
-							</p>
-						</li>
+						<Product key={p+i} position={i} productData={p}/>
 					))
 				}
 			</ul>
