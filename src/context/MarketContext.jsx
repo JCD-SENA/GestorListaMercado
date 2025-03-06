@@ -17,8 +17,8 @@ export const MarketContextHandler = ({ children }) => {
 
 	return (
 		<MarketContext.Provider value={{
-			listProduct, totalPrice, dateProduct, editMode, currentlyEditing, setListProduct, setTotalPrice, setEditMode, setCurrentlyEditing,
-			"sectionStyle": "p-2 bg-sky-900 flex flex-col text-white items-center rounded-xl"
+			listProduct, totalPrice, dateProduct, editMode, currentlyEditing,
+			setListProduct, setTotalPrice, setEditMode, setCurrentlyEditing
 		}}>
 			{children}
 		</MarketContext.Provider>

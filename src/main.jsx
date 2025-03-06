@@ -2,9 +2,12 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
 import { MarketContextHandler } from './context/MarketContext.jsx'
+import { SessionContextHandler } from './context/sessionContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-	<MarketContextHandler>
-		<App />
-	</MarketContextHandler>
+	<SessionContextHandler>
+		<MarketContextHandler>
+			<App />
+		</MarketContextHandler>
+	</SessionContextHandler>
 )

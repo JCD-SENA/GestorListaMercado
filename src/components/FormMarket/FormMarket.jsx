@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 
 import { MarketContext } from "../../context/MarketContext"
 import { InputForm } from "./InputForm/InputForm"
+import { styles } from "../../assets/styles"
 
 export const FormMarket = () => {
 	const {setListProduct, listProduct, sectionStyle, editMode, setEditMode, currentlyEditing } = useContext(MarketContext)
@@ -83,7 +84,7 @@ export const FormMarket = () => {
 					label="Categoría"
 					form={{register: register, errors: errors}}
 				/>
-				<input type="submit" className="bg-yellow-500 p-2 w-auto m-2 rounded-xl text-white" value={editMode ? "Editar producto" : "Agregar a la lista"}/>
+				<input type="submit" className={styles.submitStyle} value={editMode ? "Editar producto" : "Agregar a la lista"}/>
 			</form>
 		</section>
 	)
