@@ -1,22 +1,43 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import { MarketContext } from "../../context/MarketContext"
 import { InputForm } from "./InputForm/InputForm"
 
 export const FormMarket = () => {
-	const {setListProduct, listProduct, sectionStyle, editMode, setEditMode } = useContext(MarketContext)
+	const {setListProduct, listProduct, sectionStyle, editMode, setEditMode, currentlyEditing } = useContext(MarketContext)
 
-	const {register, handleSubmit, formState: {errors}, reset, getValues } = useForm()
+	const {register, handleSubmit, formState: {errors}, reset, setValue } = useForm()
 
 	const handleAddedProduct = (product) => {
-		if (product.shop == "")
-			product.shop = "Otro"
-		if (product.category == "")
-			product.category = "Otro"
-		setListProduct([...listProduct, product])
+		if (editMode) {
+			const newListProduct = [...listProduct]
+			newListProduct[currentlyEditing[1]].name = product.name
+			newListProduct[currentlyEditing[1]].price = product.price
+			newListProduct[currentlyEditing[1]].shop = product.shop
+			newListProduct[currentlyEditing[1]].measurement = product.measurement
+			newListProduct[currentlyEditing[1]].category = product.category
+			setListProduct(newListProduct)
+			setEditMode(false)
+		} else {
+			if (product.shop == "")
+				product.shop = "Otro"
+			if (product.category == "")
+				product.category = "Otro"
+			setListProduct([...listProduct, product])
+		}
 		reset()
 	}
+
+	useEffect(() => {
+		if (currentlyEditing) {
+			setValue("name", currentlyEditing[0].name)
+			setValue("price", currentlyEditing[0].price)
+			setValue("shop", currentlyEditing[0].shop)
+			setValue("measurement", currentlyEditing[0].measurement)
+			setValue("category", currentlyEditing[0].category)
+		}
+	}, [currentlyEditing])
 
 	return (
 		<section className={sectionStyle+" w-1/3 "}>

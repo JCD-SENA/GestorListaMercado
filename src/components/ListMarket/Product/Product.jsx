@@ -3,13 +3,13 @@ import { useContext } from "react"
 import { MarketContext } from "../../../context/MarketContext"
 
 export const Product = ({ position, productData }) => {
-	const { setEditMode } = useContext(MarketContext)
+	const { setEditMode, setCurrentlyEditing } = useContext(MarketContext)
 
 	const tdStyle = "p-1 text-center"
 
 	const editProduct = () => {
 		setEditMode(true)
-		//console.log(position)
+		setCurrentlyEditing([productData, position])
 	}
 
 	return (

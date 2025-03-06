@@ -11,9 +11,11 @@ export const ListMarket = () => {
 	let filteredList = listProduct
 
 	useEffect(() => {
-		listProduct.forEach((p) => {
-			setTotalPrice(totalPrice + p.price)
-		})
+		if (listProduct.length > 0) {
+			setTotalPrice(listProduct.map((product) => {
+				return product.price
+			}).reduce((pv, nv) => pv + nv))	
+		}
 	}, [listProduct])
 
 	useEffect(() => {

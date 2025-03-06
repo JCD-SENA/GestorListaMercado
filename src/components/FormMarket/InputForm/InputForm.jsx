@@ -1,4 +1,4 @@
-export const InputForm = ({ name, type, register, label, placeholder, form }) => {
+export const InputForm = ({ name, type, register, label, placeholder, form, value }) => {
 	return (
 		<>
 			<label className="text-yellow-500 font-bold text-center">{label}</label>
@@ -8,6 +8,7 @@ export const InputForm = ({ name, type, register, label, placeholder, form }) =>
 				name={name}
 				placeholder={placeholder}
 				type={type}
+				value={value}
 			></input>
 			{form.errors[name] && (<span className="text-red-500 italic">{form.errors[name].message}</span>)}
 		</>
