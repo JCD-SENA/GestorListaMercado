@@ -17,42 +17,42 @@ export const ListMarket = () => {
 	}, [listProduct])
 
 	useEffect(() => {
-		if (filter == "minName" || filter == "maxName" || filter == "minPrice" || filter == "maxPrice") {
-			filteredList.sort((a, b) => {
-				if (filter == "minName")
-					return a.name[0] < b.name[0] ? 1 : -1
-				if (filter == "maxName")
-					return a.name[0] > b.name[0] ? 1 : -1
-				if (filter == "minPrice")
-					return a.price < b.price ? 1 : -1
-				if (filter == "maxPrice")
-					return a.price > b.price ? 1 : -1
-			})
-		}
+		filteredList.sort((a, b) => {
+			switch (filter) {
+				case "minName": return a.name[0] < b.name[0] ? 1 : -1 ; break
+				case "maxName": return a.name[0] > b.name[0] ? 1 : -1 ; break
+				case "minStore": return a.shop[0] < b.shop[0] ? 1 : -1 ; break
+				case "maxStore": return a.shop[0] > b.shop[0] ? 1 : -1 ; break 
+				case "minMeasure": return a.measurement[0] < b.measurement[0] ? 1 : -1 ; break
+				case "maxMeasure": return a.measurement[0] > b.measurement[0] ? 1 : -1 ; break
+				case "minPrice": return a.price < b.price ? 1 : -1 ; break
+				case "maxPrice": return a.price > b.price ? 1 : -1 ; break
+			}
+		})
 	}, [filter])
 
 	return (<>
-		<section className={sectionStyle}>
+		<section className={sectionStyle+" w-3/6 "}>
 			<h2 className="mb-1 font-bold">Lista de productos</h2>
 			<h3>({dateProduct})</h3>
-			<span className="text-center"><span onClick={() => {
-				if (filter == "minName")
-					setFilter("maxName")
-				else
-					setFilter("minName")
-			}} className="font-bold">Nombre {filter == "minName" ? "⮟" : (filter == "maxName" ? "⮝" : "")}</span> | <span className="font-bold" onClick={() => {
-				if (filter == "minPrice")
-					setFilter("maxPrice")
-				else
-					setFilter("minPrice")
-			}}>Precio {filter == "minPrice" ? "⮟" : (filter == "maxPrice" ? "⮝" : "")}</span></span>
-			<ul className="flex-col flex w-full p-2 bg-sky-950 m-2 rounded-xl">
-				{
-					filteredList.map((p, i) => (
-						<Product key={p+i} position={i} productData={p}/>
-					))
-				}
-			</ul>
+			<table className="bg-sky-950 m-2 rounded-xl w-full">
+				<thead>
+					<tr className="text-yellow-500">
+						<th></th>
+						<th className="p-1" onClick={() => setFilter(filter == "minName" ? "maxName" : "minName")}>Nombre</th>
+						<th className="p-1" onClick={() => setFilter(filter == "minStore" ? "maxStore" : "minStore")}>Tienda</th>
+						<th className="p-1" onClick={() => setFilter(filter == "minPrice" ? "maxPrice" : "minPrice")}>Precio</th>
+						<th className="p-1" onClick={() => setFilter(filter == "minMeasure" ? "maxMeasure" : "minMeasure")}>Unidad de medida</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						filteredList.map((p, i) => (
+							<Product key={p+i} position={i} productData={p}/>
+						))
+					}
+				</tbody>
+			</table>
 			<h2 className="font-bold">Total: {totalPrice}$</h2>
 		</section>
 	</>)

@@ -17,7 +17,7 @@ export const FormMarket = () => {
 	}
 
 	return (
-		<section className={sectionStyle}>
+		<section className={sectionStyle+" w-1/3 "}>
 			<h2 className="mb-1 font-bold">Agregar productos</h2>
 			<form onSubmit={handleSubmit(handleAddedProduct)} className="flex-col flex w-full">
 				<InputForm 
