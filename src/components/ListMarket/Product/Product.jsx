@@ -1,8 +1,15 @@
+import { useContext } from "react"
+
+import { MarketContext } from "../../../context/MarketContext"
+
 export const Product = ({ position, productData }) => {
+	const { setEditMode } = useContext(MarketContext)
+
 	const tdStyle = "p-1 text-center"
 
 	const editProduct = () => {
-		console.log(position)
+		setEditMode(true)
+		//console.log(position)
 	}
 
 	return (
@@ -14,5 +21,6 @@ export const Product = ({ position, productData }) => {
 		<td className={tdStyle}>{productData.shop}</td>
 		<td className={tdStyle}>{productData.price}</td>
 		<td className={tdStyle}>{productData.measurement}</td>
+		<td className={tdStyle}>{productData.category}</td>
 	</tr>)
 }

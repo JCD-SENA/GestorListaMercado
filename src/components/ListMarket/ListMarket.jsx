@@ -27,6 +27,8 @@ export const ListMarket = () => {
 				case "maxMeasure": return a.measurement[0] > b.measurement[0] ? 1 : -1 ; break
 				case "minPrice": return a.price < b.price ? 1 : -1 ; break
 				case "maxPrice": return a.price > b.price ? 1 : -1 ; break
+				case "minCategory": return a.category[0] < b.category[0] ? 1 : -1 ; break
+				case "maxCategory": return a.category[0] > b.category[0] ? 1 : -1 ; break
 			}
 		})
 	}, [filter])
@@ -43,6 +45,7 @@ export const ListMarket = () => {
 						<th className="p-1" onClick={() => setFilter(filter == "minStore" ? "maxStore" : "minStore")}>Tienda</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minPrice" ? "maxPrice" : "minPrice")}>Precio</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minMeasure" ? "maxMeasure" : "minMeasure")}>Unidad de medida</th>
+						<th className="p-1" onClick={() => setFilter(filter == "minCategory" ? "maxCategory" : "minCategory")}>Categoría</th>
 					</tr>
 				</thead>
 				<tbody>
