@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react"
 
+import { styles } from "../../assets/styles"
 import { MarketContext } from "../../context/MarketContext"
 import { Product } from "./Product/Product"
 
@@ -36,9 +37,10 @@ export const ListMarket = () => {
 	}, [filter])
 
 	return (<>
-		<section className={sectionStyle+" w-3/6 "}>
+		<section className={styles.sectionStyle+" w-3/6 "}>
 			<h2 className="mb-1 font-bold">Lista de productos</h2>
 			<h3>({dateProduct})</h3>
+			{/* Poner aquí un combox con los meses sería interesante */}
 			<table className="bg-sky-950 m-2 rounded-xl w-full">
 				<thead>
 					<tr className="text-yellow-500">
