@@ -1,31 +1,37 @@
 import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
+import { createProduct, updteProduct, getProducts } from "../../utils/firebase-db"
 import { MarketContext } from "../../context/MarketContext"
+import { sessionContext } from "../../context/SessionContext"
 import { InputForm } from "./InputForm/InputForm"
 import { styles } from "../../assets/styles"
 
 export const FormMarket = () => {
 	const {setListProduct, listProduct, sectionStyle, editMode, setEditMode, currentlyEditing } = useContext(MarketContext)
+	const {session} = useContext(sessionContext)
 
 	const {register, handleSubmit, formState: {errors}, reset, setValue } = useForm()
 
 	const handleAddedProduct = (product) => {
 		if (editMode) {
-			const newListProduct = [...listProduct]
-			newListProduct[currentlyEditing[1]].name = product.name
-			newListProduct[currentlyEditing[1]].price = product.price
-			newListProduct[currentlyEditing[1]].shop = product.shop
-			newListProduct[currentlyEditing[1]].measurement = product.measurement
-			newListProduct[currentlyEditing[1]].category = product.category
-			setListProduct(newListProduct)
+			updteProduct(currentlyEditing[1], {
+				name: product.name,
+				price: product.price,
+				shop: product.shop,
+				measurement: product.measurement,
+				category: product.category
+			})
+			getProducts(session.uid, setListProduct)
 			setEditMode(false)
 		} else {
 			if (product.shop == "")
 				product.shop = "Otro"
 			if (product.category == "")
 				product.category = "Otro"
-			setListProduct([...listProduct, product])
+			product.user = session.uid
+			getProducts(session.uid, setListProduct)
+			createProduct(product)
 		}
 		reset()
 	}

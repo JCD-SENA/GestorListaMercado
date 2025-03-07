@@ -2,14 +2,20 @@ import React, { useEffect, useContext, useState } from "react"
 
 import { styles } from "../../assets/styles"
 import { MarketContext } from "../../context/MarketContext"
+import { sessionContext } from "../../context/SessionContext"
 import { Product } from "./Product/Product"
+import { getProducts } from "../../utils/firebase-db"
 
 export const ListMarket = () => {
-	const { listProduct, setTotalPrice, dateProduct, totalPrice, sectionStyle } = useContext(MarketContext)
+	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, sectionStyle } = useContext(MarketContext)
+	const { session } = useContext(sessionContext)
 
 	const [filter, setFilter] = useState("")
 
 	let filteredList = listProduct
+
+	if (listProduct.length < 1)
+		getProducts(session.uid, setListProduct)
 
 	useEffect(() => {
 		if (listProduct.length > 0) {
@@ -55,7 +61,7 @@ export const ListMarket = () => {
 				<tbody>
 					{
 						filteredList.map((p, i) => (
-							<Product key={p+i} position={i} productData={p}/>
+							<Product key={p.id} position={p.id} productData={p}/>
 						))
 					}
 				</tbody>
