@@ -8,7 +8,7 @@ import { InputForm } from "./InputForm/InputForm"
 import { styles } from "../../assets/styles"
 
 export const FormMarket = () => {
-	const {setListProduct, listProduct, sectionStyle, editMode, setEditMode, currentlyEditing } = useContext(MarketContext)
+	const {setListProduct, dateProduct, editMode, setEditMode, currentlyEditing } = useContext(MarketContext)
 	const {session} = useContext(sessionContext)
 
 	const {register, handleSubmit, formState: {errors}, reset, setValue } = useForm()
@@ -20,7 +20,8 @@ export const FormMarket = () => {
 				price: product.price,
 				shop: product.shop,
 				measurement: product.measurement,
-				category: product.category
+				category: product.category,
+				brand: product.brand
 			})
 			getProducts(session.uid, setListProduct)
 			setEditMode(false)
@@ -29,6 +30,13 @@ export const FormMarket = () => {
 				product.shop = "Otro"
 			if (product.category == "")
 				product.category = "Otro"
+			if (product.brand == "")
+				product.brand = "N/A"
+			
+			if (product.date)
+				product.date = Date.parse(product.date)
+			else
+				product.date = Date.now()
 			product.user = session.uid
 			getProducts(session.uid, setListProduct)
 			createProduct(product)
@@ -43,6 +51,7 @@ export const FormMarket = () => {
 			setValue("shop", currentlyEditing[0].shop)
 			setValue("measurement", currentlyEditing[0].measurement)
 			setValue("category", currentlyEditing[0].category)
+			setValue("brand", currentlyEditing[0].brand)
 		}
 	}, [currentlyEditing])
 
@@ -57,6 +66,13 @@ export const FormMarket = () => {
 					placeholder="Nombre del producto"
 					label="nombre"
 					form={{register: register, errors: errors}}
+				/>
+				<InputForm
+					name="brand"
+					type="text"
+					form={{register: register, errors: errors}}
+					placeholder="Marca del producto"
+					label="Marca"
 				/>
 				<InputForm 
 					name="price"
@@ -88,6 +104,13 @@ export const FormMarket = () => {
 					type="text"
 					placeholder="La categoría del producto"
 					label="Categoría"
+					form={{register: register, errors: errors}}
+				/>
+				<InputForm
+					name="date"
+					type="date"
+					placeholder="Ingresar una fecha especifica"
+					label="Fecha"
 					form={{register: register, errors: errors}}
 				/>
 				<input type="submit" className={styles.submitStyle} value={editMode ? "Editar producto" : "Agregar a la lista"}/>

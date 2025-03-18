@@ -12,12 +12,14 @@ export const getProducts = async (uid, setFunction) => {
 		q.forEach((product) => {
 			const fullObject = {
 				name: product.data().name,
+				brand: product.data().brand,
 				price: product.data().price,
 				shop: product.data().shop,
 				category: product.data().category,
 				measurement: product.data().measurement,
 				user: uid,
-				id: product.id
+				id: product.id,
+				date: new Date(product.data().date)
 			}
 			list.push(fullObject)
 		})

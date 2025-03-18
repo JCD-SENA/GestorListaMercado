@@ -5,25 +5,35 @@ import { MarketContext } from "../../context/MarketContext"
 import { sessionContext } from "../../context/SessionContext"
 import { Product } from "./Product/Product"
 import { getProducts } from "../../utils/firebase-db"
+import { CategorySelect } from "../CategorySelect/CategorySelect"
+import { DateSelect } from "../DafeSelect/DateSelect"
 
 export const ListMarket = () => {
-	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, sectionStyle } = useContext(MarketContext)
+	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, categoryFilter, month } = useContext(MarketContext)
 	const { session } = useContext(sessionContext)
 
 	const [filter, setFilter] = useState("")
 
 	let filteredList = listProduct
 
-	if (listProduct.length < 1)
+	useEffect(() => {
 		getProducts(session.uid, setListProduct)
+	}, [session])
 
 	useEffect(() => {
 		if (listProduct.length > 0) {
-			setTotalPrice(listProduct.map((product) => {
+			setTotalPrice(listProduct.filter(listFilter).map((product) => {
 				return product.price
 			}).reduce((pv, nv) => pv + nv))	
 		}
-	}, [listProduct])
+	}, [listProduct, categoryFilter, month])
+
+	const listFilter = (product) => {
+		if (categoryFilter != "*" || !categoryFilter)
+			return product.category == categoryFilter
+		else 
+			return true
+	}
 
 	useEffect(() => {
 		filteredList.sort((a, b) => {
@@ -37,7 +47,8 @@ export const ListMarket = () => {
 				case "minPrice": return a.price < b.price ? 1 : -1 ; break
 				case "maxPrice": return a.price > b.price ? 1 : -1 ; break
 				case "minCategory": return a.category[0] < b.category[0] ? 1 : -1 ; break
-				case "maxCategory": return a.category[0] > b.category[0] ? 1 : -1 ; break
+				case "maxBrand": return a.brand[0] > b.brand[0] ? 1 : -1 ; break
+				case "minBrand": return a.brand[0] < b.brand[0] ? 1 : -1 ; break
 			}
 		})
 	}, [filter])
@@ -46,12 +57,16 @@ export const ListMarket = () => {
 		<section className={styles.sectionStyle+" w-3/6 "}>
 			<h2 className="mb-1 font-bold">Lista de productos</h2>
 			<h3>({dateProduct})</h3>
-			{/* Poner aquí un combox con los meses sería interesante */}
+			<div>
+				<CategorySelect/>
+				<DateSelect/>
+			</div>
 			<table className="bg-sky-950 m-2 rounded-xl w-full">
 				<thead>
 					<tr className="text-yellow-500">
 						<th></th>
 						<th className="p-1" onClick={() => setFilter(filter == "minName" ? "maxName" : "minName")}>Nombre</th>
+						<th className="p-1" onClick={() => setFilter(filter == "minBrand" ? "maxBrand" : "minBrand")}>Marca</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minStore" ? "maxStore" : "minStore")}>Tienda</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minPrice" ? "maxPrice" : "minPrice")}>Precio</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minMeasure" ? "maxMeasure" : "minMeasure")}>Unidad de medida</th>
@@ -60,7 +75,7 @@ export const ListMarket = () => {
 				</thead>
 				<tbody>
 					{
-						filteredList.map((p, i) => (
+						filteredList.filter(listFilter).map((p, i) => (
 							<Product key={p.id} position={p.id} productData={p}/>
 						))
 					}
