@@ -44,13 +44,23 @@ export const MonthComparation = () => {
 
 	const comparePrices = () => {
 		let pricesComparation = []
-		const monthA = getMonthCoincides(month1, month2)
-		const monthB = getMonthCoincides(month2, month1)
+		const monthB = getMonthCoincides(month1, month2)
+		const monthA = getMonthCoincides(month2, month1)
 		monthA.forEach((product, index) => {
-			console(product.price, monthB[index].price)
+			let styleComparation = "text-center"
+			let diff = product.price - monthB[index].price
+			if (diff > 0)
+				styleComparation = "text-red-500 text-center"
+			if (diff < 0)
+				styleComparation = "text-green-500 text-center"
+			pricesComparation.push({
+				style: styleComparation,
+				value: diff
+			})
 		})
 		return pricesComparation
 	}
+
 	return (
 		<section className={styles.sectionStyle}>
 			<h2 className="mb-1 font-bold">Comparación de meses</h2>
@@ -62,10 +72,12 @@ export const MonthComparation = () => {
 			<div className="flex">
 				<table className={styles.tableStlye}>
 					<thead className="text-yellow-500">
-						<th className="p-1">Nombre</th>
-						<th className="p-1">Marca</th>
-						<th className="p-1">Tienda</th>
-						<th className="p-1">Precio</th>
+						<tr>
+							<th className="p-1">Nombre</th>
+							<th className="p-1">Marca</th>
+							<th className="p-1">Tienda</th>
+							<th className="p-1">Precio</th>
+						</tr>
 					</thead>
 					<tbody>
 						{getMonthCoincides(month1, month2).map((product) => {
@@ -74,30 +86,32 @@ export const MonthComparation = () => {
 									<td className={styles.tdStyle}>{product.name}</td>
 									<td className={styles.tdStyle}>{product.brand}</td>
 									<td className={styles.tdStyle}>{product.shop}</td>
-									<td className={styles.tdStyle}>{product.price}</td>
+									<td className={styles.tdStyle}>{product.price}$</td>
 								</tr>
 							)
 						})}
 					</tbody>
 				</table>
-				<table>
+				<table className="m-2">
 					<thead>
 						<th className="p-1 text-yellow-500">Diferencia</th>
 					</thead>
 					<tbody>
 						{comparePrices().map((price) => {
-							<tr>
-								<td className={price.style}>{price.value}</td>
-							</tr>
+							return (<tr>
+								<td className={price.style}>{price.value}$</td>
+							</tr>)
 						})}
 					</tbody>
 				</table>
 				<table className={styles.tableStlye}>
 					<thead className="text-yellow-500">
-						<th className="p-1">Nombre</th>
-						<th className="p-1">Marca</th>
-						<th className="p-1">Tienda</th>
-						<th className="p-1">Precio</th>
+						<tr>
+							<th className="p-1">Nombre</th>
+							<th className="p-1">Marca</th>
+							<th className="p-1">Tienda</th>
+							<th className="p-1">Precio</th>
+						</tr>
 					</thead>
 					<tbody>
 						{getMonthCoincides(month2, month1).map((product) => {
@@ -106,7 +120,7 @@ export const MonthComparation = () => {
 									<td className={styles.tdStyle}>{product.name}</td>
 									<td className={styles.tdStyle}>{product.brand}</td>
 									<td className={styles.tdStyle}>{product.shop}</td>
-									<td className={styles.tdStyle}>{product.price}</td>
+									<td className={styles.tdStyle}>{product.price}$</td>
 								</tr>
 							)
 						})}

@@ -19,7 +19,7 @@ export const Product = ({ position, productData }) => {
 		<td className={styles.tdStyle}>{productData.name}</td>
 		<td className={styles.tdStyle}>{productData.brand}</td>
 		<td className={styles.tdStyle}>{productData.shop}</td>
-		<td className={styles.tdStyle}>{productData.price}</td>
+		<td className={styles.tdStyle}>{productData.price}$</td>
 		<td className={styles.tdStyle}>{productData.measurement}</td>
 		<td className={styles.tdStyle}>{productData.category}</td>
 	</tr>)
