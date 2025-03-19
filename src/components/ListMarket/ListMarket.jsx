@@ -6,7 +6,7 @@ import { sessionContext } from "../../context/SessionContext"
 import { Product } from "./Product/Product"
 import { getProducts } from "../../utils/firebase-db"
 import { CategorySelect } from "../CategorySelect/CategorySelect"
-import { DateSelect } from "../DafeSelect/DateSelect"
+import { DateSelect } from "../DateSelect/DateSelect"
 
 export const ListMarket = () => {
 	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, categoryFilter, month, setMonth, setChartMode } = useContext(MarketContext)
@@ -57,9 +57,10 @@ export const ListMarket = () => {
 		<section className={styles.sectionStyle+" w-3/6 "}>
 			<h2 className="mb-1 font-bold">Lista de productos</h2>
 			<h3>({dateProduct})</h3>
+			<a className="font-bold text-yellow-500" onClick={() => setChartMode("comparation")}>Comparar meses</a>
 			<div>
 				<CategorySelect/>
-				<DateSelect onChangeFunction={setMonth}/>
+				<DateSelect onChangeFunction={setMonth} month={month}/>
 			</div>
 			<table className={styles.tableStlye}>
 				<thead>

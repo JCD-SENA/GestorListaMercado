@@ -3,8 +3,8 @@ import { useContext } from "react"
 import { styles } from "../../assets/styles"
 import { MarketContext } from "../../context/MarketContext"
 
-export const DateSelect = ({ onChangeFunction }) => {
-	const { listProduct, dateProduct, month } = useContext(MarketContext)
+export const DateSelect = ({ onChangeFunction, month }) => {
+	const { listProduct } = useContext(MarketContext)
 	let listDates = []
 	return (
 		<select className={styles.selectStyle} value={month} onChange={(e) => onChangeFunction(e.target.value)}>

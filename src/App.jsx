@@ -19,14 +19,16 @@ export default () => {
 
 	const displayProper = () => {
 		if (session) {
-			let chart = <ListMarket/>
+			let chart = <>
+				<FormMarket/>
+				<ListMarket/>
+			</>
 			if (chartMode == "comparation")
 				chart = <MonthComparation/>
 			if (chartMode == "summary")
 				chart = <MonthSummary/>
 			return (<>
 				<CloseSession/>
-				<FormMarket/>
 				{ chart }
 			</>)
 		} else {
