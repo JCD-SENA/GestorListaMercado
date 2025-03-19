@@ -11,6 +11,7 @@ export const MarketContextHandler = ({ children }) => {
 	const [currentlyEditing, setCurrentlyEditing] = useState(undefined)
 	const [categoryFilter, setCategoryFilter] = useState("*")
 	const [month, setMonth] = useState()
+	const [chartMode, setChartMode] = useState("full")
 	
 	useEffect(() => {
 		setDateProduct(`${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`)
@@ -20,8 +21,8 @@ export const MarketContextHandler = ({ children }) => {
 
 	return (
 		<MarketContext.Provider value={{
-			listProduct, totalPrice, dateProduct, editMode, currentlyEditing, categoryFilter, month,
-			setListProduct, setTotalPrice, setEditMode, setCurrentlyEditing, setCategoryFilter, setMonth
+			listProduct, totalPrice, dateProduct, editMode, currentlyEditing, categoryFilter, month, chartMode,
+			setListProduct, setTotalPrice, setEditMode, setCurrentlyEditing, setCategoryFilter, setMonth, setChartMode
 		}}>
 			{children}
 		</MarketContext.Provider>

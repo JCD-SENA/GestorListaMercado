@@ -9,7 +9,7 @@ import { CategorySelect } from "../CategorySelect/CategorySelect"
 import { DateSelect } from "../DafeSelect/DateSelect"
 
 export const ListMarket = () => {
-	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, categoryFilter, month } = useContext(MarketContext)
+	const { listProduct, setListProduct, setTotalPrice, dateProduct, totalPrice, categoryFilter, month, setMonth, setChartMode } = useContext(MarketContext)
 	const { session } = useContext(sessionContext)
 
 	const [filter, setFilter] = useState("")
@@ -32,7 +32,7 @@ export const ListMarket = () => {
 		if (categoryFilter != "*" || !categoryFilter)
 			return product.category == categoryFilter
 		else 
-			return true
+			return `${product.date.getMonth() + 1}/${product.date.getFullYear()}` == month
 	}
 
 	useEffect(() => {
@@ -59,9 +59,9 @@ export const ListMarket = () => {
 			<h3>({dateProduct})</h3>
 			<div>
 				<CategorySelect/>
-				<DateSelect/>
+				<DateSelect onChangeFunction={setMonth}/>
 			</div>
-			<table className="bg-sky-950 m-2 rounded-xl w-full">
+			<table className={styles.tableStlye}>
 				<thead>
 					<tr className="text-yellow-500">
 						<th></th>
@@ -81,7 +81,8 @@ export const ListMarket = () => {
 					}
 				</tbody>
 			</table>
-			<h2 className="font-bold">Total: {totalPrice}$</h2>
+			<h2 className="font-bold m-1">Total del mes: {totalPrice}$</h2>
+			<a className="font-bold text-yellow-500" onClick={() => setChartMode("summary")}>Ver gastos por mes</a>
 		</section>
 	</>)
 }
