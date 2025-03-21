@@ -1,18 +1,31 @@
 import { useContext } from "react"
 
 import { MarketContext } from "../../../context/MarketContext"
+import { sessionContext } from "../../../context/SessionContext"
 import { styles } from "../../../assets/styles"
 
+import { updateProduct, getProducts } from "../../../utils/firebase-db"
+
 export const Product = ({ position, productData }) => {
-	const { setEditMode, setCurrentlyEditing } = useContext(MarketContext)
+	const { setEditMode, setCurrentlyEditing, setListProduct } = useContext(MarketContext)
+	const {session} = useContext(sessionContext)
 
 	const editProduct = () => {
-		setEditMode(true)
-		setCurrentlyEditing([productData, position])
+		if (productData.status == "activo") {
+			setEditMode(true)
+			setCurrentlyEditing([productData, position])
+		}
+	}
+
+	const deactivateProduct = () => {
+		updateProduct(position, {
+			status: productData.status == "activo" ? "inactivo" : "activo"
+		})
+		getProducts(session.uid, setListProduct)
 	}
 
 	return (
-	<tr>
+	<tr className={productData.status == "activo" ? "" : "opacity-25"}>
 		<td className="w-1">
 			<button className="bg-yellow-500 p-1 pr-3 pl-3 rounded-xl text-center m-1 ml-6" onClick={editProduct}>Editar</button>
 		</td>
@@ -22,5 +35,8 @@ export const Product = ({ position, productData }) => {
 		<td className={styles.tdStyle}>{productData.price}$</td>
 		<td className={styles.tdStyle}>{productData.measurement}</td>
 		<td className={styles.tdStyle}>{productData.category}</td>
+		<td className="w-1">
+			<button className="bg-red-500 p-1 pr-3 pl-3 rounded-xl text-center m-1 ml-6" onClick={deactivateProduct}>X</button>
+		</td>
 	</tr>)
 }

@@ -23,7 +23,7 @@ export const ListMarket = () => {
 	useEffect(() => {
 		if (listProduct.length > 0) {
 			setTotalPrice(listProduct.filter(listFilter).map((product) => {
-				return product.price
+				return product.status == "activo" ? product.price : 0
 			}).reduce((pv, nv) => pv + nv))	
 		}
 	}, [listProduct, categoryFilter, month])
@@ -72,6 +72,7 @@ export const ListMarket = () => {
 						<th className="p-1" onClick={() => setFilter(filter == "minPrice" ? "maxPrice" : "minPrice")}>Precio</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minMeasure" ? "maxMeasure" : "minMeasure")}>Unidad de medida</th>
 						<th className="p-1" onClick={() => setFilter(filter == "minCategory" ? "maxCategory" : "minCategory")}>Categoría</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>

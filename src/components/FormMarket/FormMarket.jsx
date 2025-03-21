@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
-import { createProduct, updteProduct, getProducts } from "../../utils/firebase-db"
+import { createProduct, updateProduct, getProducts } from "../../utils/firebase-db"
 import { MarketContext } from "../../context/MarketContext"
 import { sessionContext } from "../../context/SessionContext"
 import { InputForm } from "./InputForm/InputForm"
@@ -15,13 +15,14 @@ export const FormMarket = () => {
 
 	const handleAddedProduct = (product) => {
 		if (editMode) {
-			updteProduct(currentlyEditing[1], {
+			updateProduct(currentlyEditing[1], {
 				name: product.name,
 				price: product.price,
 				shop: product.shop,
 				measurement: product.measurement,
 				category: product.category,
-				brand: product.brand
+				brand: product.brand,
+				status: "active"
 			})
 			getProducts(session.uid, setListProduct)
 			setEditMode(false)
@@ -37,6 +38,7 @@ export const FormMarket = () => {
 				product.date = Date.parse(product.date)
 			else
 				product.date = Date.now()
+			product.status = "active"
 			product.user = session.uid
 			getProducts(session.uid, setListProduct)
 			createProduct(product)

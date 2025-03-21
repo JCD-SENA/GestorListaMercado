@@ -20,7 +20,7 @@ export const MonthSummary = () => {
 				<tbody>
 					{listProduct.map((product) => {
 						let date = (product.date.getMonth() + 1) + "/" + product.date.getFullYear()
-						if (Object.keys(listMoney).includes(date))
+						if (Object.keys(listMoney).includes(date) && product.status == "activo")
 							listMoney[date].price += product.price
 						else {
 							listMoney[date] = {

@@ -13,7 +13,7 @@ export const MonthComparation = () => {
 	const getProductMonth = (selectedMonth) => {
 		let productsList = []
 		listProduct.forEach((product) => {
-			if (`${product.date.getMonth() + 1}/${product.date.getFullYear()}` == selectedMonth) {
+			if (`${product.date.getMonth() + 1}/${product.date.getFullYear()}` == selectedMonth && product.status == "activo") {
 				productsList.push(product)
 			}
 		})

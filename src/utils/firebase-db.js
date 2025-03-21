@@ -19,6 +19,7 @@ export const getProducts = async (uid, setFunction) => {
 				measurement: product.data().measurement,
 				user: uid,
 				id: product.id,
+				status: product.data().status,
 				date: new Date(product.data().date)
 			}
 			list.push(fullObject)
@@ -27,6 +28,6 @@ export const getProducts = async (uid, setFunction) => {
 	})
 } 
 
-export const updteProduct = async (id, data) => {
+export const updateProduct = async (id, data) => {
 	await updateDoc(doc(db, "product", id), data)
 }
