@@ -25,7 +25,7 @@ export const MonthSummary = () => {
 						else {
 							listMoney[date] = {
 								price: product.price,
-								month: product.date.getMonth(),
+								month: product.date.getMonth() + 1,
 								year: product.date.getFullYear()
 							}
 						}

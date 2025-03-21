@@ -21,8 +21,7 @@ export const FormMarket = () => {
 				shop: product.shop,
 				measurement: product.measurement,
 				category: product.category,
-				brand: product.brand,
-				status: "active"
+				brand: product.brand
 			})
 			getProducts(session.uid, setListProduct)
 			setEditMode(false)
@@ -38,7 +37,7 @@ export const FormMarket = () => {
 				product.date = Date.parse(product.date)
 			else
 				product.date = Date.now()
-			product.status = "active"
+			product.status = "activo"
 			product.user = session.uid
 			getProducts(session.uid, setListProduct)
 			createProduct(product)

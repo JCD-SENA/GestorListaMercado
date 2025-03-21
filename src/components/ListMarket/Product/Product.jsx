@@ -36,7 +36,7 @@ export const Product = ({ position, productData }) => {
 		<td className={styles.tdStyle}>{productData.measurement}</td>
 		<td className={styles.tdStyle}>{productData.category}</td>
 		<td className="w-1">
-			<button className="bg-red-500 p-1 pr-3 pl-3 rounded-xl text-center m-1 ml-6" onClick={deactivateProduct}>X</button>
+			<button className={productData.status == "activo" ? "bg-red-500 p-1 pr-3 pl-3 rounded-xl text-center m-1 ml-6" : "bg-green-500 p-1 pr-3 pl-3 rounded-xl text-center m-1 ml-6"} onClick={deactivateProduct}>{productData.status == "activo" ? "X" : "✔"}</button>
 		</td>
 	</tr>)
 }
