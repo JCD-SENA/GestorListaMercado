@@ -29,6 +29,5 @@ export const getProducts = async (uid, setFunction) => {
 } 
 
 export const updateProduct = async (id, data) => {
-	console.log(data)
 	await updateDoc(doc(db, "product", id), data)
 }

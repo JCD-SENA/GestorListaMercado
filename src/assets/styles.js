@@ -5,7 +5,7 @@ export const styles = {
 	tableStlye: "bg-sky-950 m-2 rounded-xl md:w-full",
 	tdStyle: "p-1 text-center",
 	sectionTitle: "md:mb-1 font-bold mt-1 max-md:text-4xl max-md:m-5",
-	bodyStyle: "max-md:flex-col flex md:flex-row flex place-content-evenly items-center w-screen min-h-screen"
+	bodyStyle: "max-md:flex-col flex md:flex-row flex place-content-evenly items-center w-screen md:min-h-screen"
 }
 
 export const responsive = {
