@@ -4,7 +4,7 @@ import { useContext } from "react"
 
 import { createUserEmailPass } from "../../utils/firebase-email"
 
-import { styles } from "../../assets/styles"
+import { styles, responsive } from "../../assets/styles"
 import { InputForm } from "../FormMarket/InputForm/InputForm"
 import { sessionContext } from "../../context/SessionContext"
 
@@ -26,8 +26,8 @@ export const Register = () => {
 	}
 
 	return (
-		<section className={styles.sectionStyle+" w-100 "}>
-			<h2 className="mb-1 font-bold mt-1">Registrarse</h2>
+		<section className={`${styles.sectionStyle} ${responsive.form}`}>
+			<h2 className={styles.sectionTitle}>Registrarse</h2>
 			<form onSubmit={handleSubmit(handleRegister)} className="flex-col flex w-full">
 				<InputForm
 					name="username"

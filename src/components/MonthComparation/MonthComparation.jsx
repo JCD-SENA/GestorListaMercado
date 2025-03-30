@@ -50,11 +50,12 @@ export const MonthComparation = () => {
 			let styleComparation = "text-center"
 			let diff = product.price - monthB[index].price
 			if (diff > 0)
-				styleComparation = "text-red-500 text-center"
+				styleComparation = "text-red-500 text-center "
 			if (diff < 0)
 				styleComparation = "text-green-500 text-center"
 			pricesComparation.push({
 				style: styleComparation,
+				name: product.name,
 				value: diff
 			})
 		})
@@ -62,14 +63,15 @@ export const MonthComparation = () => {
 	}
 
 	return (
-		<section className={styles.sectionStyle}>
-			<h2 className="mb-1 font-bold">Comparación de meses</h2>
-			<div>
+		<section className={`${styles.sectionStyle}`}>
+			<h2 className="mb-1 font-bold text-2xl">Comparación de meses</h2>
+			<div className="max-md:sr-only max-md:sr-only">
 				<DateSelect onChangeFunction={setMonth1} month={month1}/>
 				<DateSelect onChangeFunction={setMonth2} month={month2}/>
 			</div>
 			<span>Solo se muestran y comparan los productos que salgan en ambos meses</span>
-			<div className="flex">
+			<div className="flex max-md:flex-col">
+			<DateSelect onChangeFunction={setMonth1} month={month1} style="max-md:w-85 md:sr-only"/>
 				<table className={styles.tableStlye}>
 					<thead className="text-yellow-500">
 						<tr>
@@ -92,18 +94,22 @@ export const MonthComparation = () => {
 						})}
 					</tbody>
 				</table>
-				<table className="m-2">
+				<table className="m-2 items-center flex flex-col">
 					<thead>
 						<th className="p-1 text-yellow-500">Diferencia</th>
 					</thead>
 					<tbody>
 						{comparePrices().map((price) => {
 							return (<tr>
-								<td className={price.style}>{price.value}$</td>
+								<td>
+									<span className="max-md:ml-1 md:sr-only">{price.name}</span>
+									<span className={price.style}> {price.value}$</span>
+								</td>
 							</tr>)
 						})}
 					</tbody>
 				</table>
+				<DateSelect onChangeFunction={setMonth2} month={month2} style="max-md:w-85 md:sr-only"/>
 				<table className={styles.tableStlye}>
 					<thead className="text-yellow-500">
 						<tr>

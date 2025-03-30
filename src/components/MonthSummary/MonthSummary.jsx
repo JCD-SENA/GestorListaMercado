@@ -7,9 +7,9 @@ export const MonthSummary = () => {
 	const { setChartMode, listProduct } = useContext(MarketContext)
 	let listMoney = {}
 	return (
-		<section className={styles.sectionStyle}>
-			<h2 className="mb-1 font-bold">Resumen de gastos por mes</h2>
-			<table className={styles.tableStlye}>
+		<section className={`${styles.sectionStyle} max-md:w-screen max-md:h-screen`}>
+			<h2 className="mb-1 font-bold text-xl">Resumen de gastos por mes</h2>
+			<table className={`${styles.tableStlye} max-md:w-85 max-md:min-h-fit`}>
 				<thead className="text-yellow-500">
 					<tr>
 						<th className="p-1">Mes</th>

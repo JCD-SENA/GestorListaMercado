@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { useContext } from "react"
 
-import { styles } from "../../assets/styles"
+import { styles, responsive } from "../../assets/styles"
 
 import { InputForm } from "../FormMarket/InputForm/InputForm"
 import { sessionContext } from "../../context/SessionContext"
@@ -25,8 +25,8 @@ export const Login = () => {
 	}
 
 	return (
-		<section className={styles.sectionStyle+" w-100 "}>
-			<h2 className="mb-1 font-bold mt-1">Iniciar sesión</h2>
+		<section className={`${styles.sectionStyle} ${responsive.form}`}>
+			<h2 className={styles.sectionTitle}>Iniciar sesión</h2>
 			<form onSubmit={handleSubmit(handleLogin)} className="flex-col flex w-full">
 				<InputForm
 					name="email"

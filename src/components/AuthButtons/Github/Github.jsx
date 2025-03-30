@@ -15,6 +15,6 @@ export const Github = ({}) => {
 	}
 
 	return (
-		<button onClick={handleSession} className="text-white p-2 w-40 mb-2 bg-gray-600 rounded-xl">Github</button>
+		<button onClick={handleSession} className="text-white p-2 w-40 mb-2 bg-gray-600 rounded-xl max-md:w-90 max-md:text-lg">Github</button>
 	)
 }

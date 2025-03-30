@@ -54,15 +54,15 @@ export const ListMarket = () => {
 	}, [filter])
 
 	return (<>
-		<section className={styles.sectionStyle+" w-3/6 "}>
+		<section className={`${styles.sectionStyle} md:w-3/6 max-md:w-screen mt-5`}>
 			<h2 className="mb-1 font-bold">Lista de productos</h2>
 			<h3>({dateProduct})</h3>
 			<a className="font-bold text-yellow-500" onClick={() => setChartMode("comparation")}>Comparar meses</a>
-			<div>
+			<div className="max-md:flex max-md:flex-col">
 				<CategorySelect/>
 				<DateSelect onChangeFunction={setMonth} month={month}/>
 			</div>
-			<table className={styles.tableStlye}>
+			<table className={`${styles.tableStlye} max-md:sr-only`}>
 				<thead>
 					<tr className="text-yellow-500">
 						<th></th>
@@ -83,6 +83,11 @@ export const ListMarket = () => {
 					}
 				</tbody>
 			</table>
+			<div className="md:sr-only">
+				{filteredList.filter(listFilter).map((p, i) => (
+					<Product key={p.id} position={p.id} productData={p}/>
+				))}
+			</div>
 			<h2 className="font-bold m-1">Total del mes: {totalPrice}$</h2>
 			<a className="font-bold text-yellow-500" onClick={() => setChartMode("summary")}>Ver gastos por mes</a>
 		</section>

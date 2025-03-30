@@ -57,7 +57,7 @@ export const FormMarket = () => {
 	}, [currentlyEditing])
 
 	return (
-		<section className={styles.sectionStyle+" w-1/3 "}>
+		<section className={`${styles.sectionStyle} md:w-1/3 max-md:w-screen`}>
 			<h2 className="mb-1 font-bold">{editMode ? "Editar producto" : "Agregar productos"}</h2>
 			<form onSubmit={handleSubmit(handleAddedProduct)} className="flex-col flex w-full">
 				<InputForm 

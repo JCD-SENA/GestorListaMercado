@@ -10,6 +10,6 @@ export const Facebook = ({}) => {
 	}
 
 	return (
-		<button className="text-white p-2 w-40 mb-2 bg-sky-950 rounded-xl" onClick={handleSession}>Facebook</button>
+		<button className="text-white p-2 w-40 mb-2 bg-sky-950 rounded-xl max-md:w-90 max-md:text-lg" onClick={handleSession}>Facebook</button>
 	)
 }

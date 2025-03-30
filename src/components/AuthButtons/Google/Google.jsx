@@ -15,7 +15,7 @@ export const Google = () => {
 	}
 
 	return (
-		<button onClick={handleSession} className="bg-white p-2 w-40 m-2 rounded-xl">
+		<button onClick={handleSession} className="bg-white p-2 md:w-40 m-2 rounded-xl max-md:w-90 max-md:text-lg">
 			<span className="text-blue-600">G</span>
 			<span className="text-red-600">o</span>
 			<span className="text-yellow-500">o</span>

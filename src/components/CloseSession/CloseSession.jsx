@@ -14,5 +14,5 @@ export const CloseSession = () => {
 		})
 	}
 
-	return (<span className="text-yellow-500 font-bold absolute top-1 right-2 p-2" onClick={sessionClose}>Cerrar sesión</span>)
+	return (<span className="text-yellow-500 font-bold md:absolute md:top-1 md:right-2 p-2" onClick={sessionClose}>Cerrar sesión</span>)
 }

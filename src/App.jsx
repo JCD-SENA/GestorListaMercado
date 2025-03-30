@@ -12,6 +12,7 @@ import { Register } from './components/Register/Register'
 import { Login } from './components/Login/Login'
 import { MonthComparation } from './components/MonthComparation/MonthComparation'
 import { MonthSummary } from './components/MonthSummary/MonthSummary'
+import { styles } from './assets/styles'
 
 export default () => {
 	const { session, logOrSignIn } = useContext(sessionContext)
@@ -20,6 +21,7 @@ export default () => {
 	const displayProper = () => {
 		if (session) {
 			let chart = <>
+				<CloseSession/>
 				<FormMarket/>
 				<ListMarket/>
 			</>
@@ -27,10 +29,7 @@ export default () => {
 				chart = <MonthComparation/>
 			if (chartMode == "summary")
 				chart = <MonthSummary/>
-			return (<>
-				<CloseSession/>
-				{ chart }
-			</>)
+			return (chart)
 		} else {
 			if (logOrSignIn == "sign") {
 				return (<Register/>)
@@ -40,5 +39,7 @@ export default () => {
 		}	
 	}
 
-	return (<>{displayProper()}</>)
+	return (<div className={styles.bodyStyle}>
+		{displayProper()}
+	</div>)
 }
