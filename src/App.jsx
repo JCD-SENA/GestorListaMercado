@@ -26,9 +26,15 @@ export default () => {
 				<ListMarket/>
 			</>
 			if (chartMode == "comparation")
-				chart = <MonthComparation/>
+				chart = <>
+					<CloseSession/>
+					<MonthComparation/>
+				</>
 			if (chartMode == "summary")
-				chart = <MonthSummary/>
+				chart = <>
+					<CloseSession/>
+					<MonthSummary/>
+				</>
 			return (chart)
 		} else {
 			if (logOrSignIn == "sign") {

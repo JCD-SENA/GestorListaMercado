@@ -100,10 +100,13 @@ export const MonthComparation = () => {
 					</thead>
 					<tbody>
 						{comparePrices().map((price) => {
-							return (<tr>
-								<td>
-									<span className="max-md:ml-1 md:sr-only">{price.name}</span>
-									<span className={price.style}> {price.value}$</span>
+							return (<tr className="md:h-8">
+								<td className="md:sr-only">
+									<span className="max-md:ml-1">{price.name}</span>
+									<span className={price.style}>{price.value}$</span>
+								</td>
+								<td className={`max-md:sr-only ${price.style}`}>
+									{price.value}$
 								</td>
 							</tr>)
 						})}
