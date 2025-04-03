@@ -50,7 +50,7 @@ export const Login = () => {
 						}
 					}}
 				/>
-				<input type="submit" className={styles.submitStyle} value="Registrase"/>
+				<input type="submit" className={styles.submitStyle} value="Inicar sesión"/>
 			</form>
 			<div className="flex-col flex w-full items-center">
 				o iniciar sesión con
