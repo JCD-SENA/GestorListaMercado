@@ -9,7 +9,7 @@ import { InputForm } from "../FormMarket/InputForm/InputForm"
 
 export const HelpForm = () => {
 	const { setChartMode } = useContext(MarketContext)
-	const {register, handleSubmit, formState: {errors} } = useForm()
+	const {register, handleSubmit, formState: {errors}, reset } = useForm()
 
 	const handleContact = (contactInfo) => {
 		emailjs.send(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, {
@@ -17,7 +17,10 @@ export const HelpForm = () => {
 			subject: contactInfo.subject,
 			message: contactInfo.content,
 			email: contactInfo.email
-		}, import.meta.env.VITE_PUBLIC_KEY)
+		}, import.meta.env.VITE_PUBLIC_KEY).then(() => {
+			alert("Se envió el correo")
+			reset()
+		})
 	}
 
 	useEffect(() => {
